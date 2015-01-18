@@ -1,61 +1,61 @@
 defmodule Entice.Skills do
   use Entice.Skill
 
-  defskill HealingSignet do
+  defskill HealingSignet, id: 1 do
     def description,   do: "You gain 82...154...172 Health. You have -40 armor while using this skill."
     def cast_time,     do: 2000
     def recharge_time, do: 4000
   end
 
-  defskill ResurrectionSignet do
+  defskill ResurrectionSignet, id: 2 do
     def description,   do: "Resurrects target party member (100% Health, 25% Energy). This signet only recharges when you gain a morale boost."
     def cast_time,     do: 3000
     def recharge_time, do: 0
   end
 
-  defskill SignetOfCapture do
+  defskill SignetOfCapture, id: 3 do
     def description,   do: "Choose one skill from a nearby dead Boss of your profession. Signet of Capture is permanently replaced by that skill. If that skill was elite, gain 250 XP for every level you have earned."
     def cast_time,     do: 2000
     def recharge_time, do: 2000
   end
 
-  defskill Bamph do
+  defskill Bamph, id: 4 do
     def description,   do: "BAMPH!"
     def cast_time,     do: 0
     def recharge_time, do: 0
   end
 
-  defskill PowerBlock do
+  defskill PowerBlock, id: 5 do
     def description,   do: "If target foe is casting a spell or chant, that skill and all skills of the same attribute are disabled (1...10...12 seconds) and that skill is interrupted."
     def cast_time,     do: 250
     def recharge_time, do: 20000
   end
 
-  defskill MantraOfEarth do
+  defskill MantraOfEarth, id: 6 do
     def description,   do: "(30...78...90 seconds.) Reduces earth damage you take by 26...45...50%. You gain 2 Energy when you take earth damage."
     def cast_time,     do: 0
     def recharge_time, do: 20000
   end
 
-  defskill MantraOfFlame do
+  defskill MantraOfFlame, id: 7 do
     def description,   do: "(30...78...90 seconds.) Reduces fire damage you take by 26...45...50%. You gain 2 Energy when you take fire damage."
     def cast_time,     do: 0
     def recharge_time, do: 20000
   end
 
-  defskill MantraOfFrost do
+  defskill MantraOfFrost, id: 8 do
     def description,   do: "(30...78...90 seconds.) Reduces cold damage you take by 26...45...50%. You gain 2 Energy when you take cold damage."
     def cast_time,     do: 0
     def recharge_time, do: 20000
   end
 
-  defskill MantraOfLightning do
+  defskill MantraOfLightning, id: 9 do
     def description,   do: "(30...78...90 seconds.) Reduces lightning damage you take by 26...45...50%. You gain 2 Energy when you take lightning damage."
     def cast_time,     do: 0
     def recharge_time, do: 20000
   end
 
-  defskill HexBreaker do
+  defskill HexBreaker, id: 10 do
     def description,   do: "(5...65...80 seconds.) The next hex against you fails and the caster takes 10...39...46 damage."
     def cast_time,     do: 0
     def recharge_time, do: 15000

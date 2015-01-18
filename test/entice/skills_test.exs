@@ -2,16 +2,21 @@ defmodule Entice.SkillsTest do
   use Entice.Skill
   use ExUnit.Case
 
-  defskill SomeSkill do
+  defskill SomeSkill, id: 1 do
     def description,   do: "Is some skill."
     def cast_time,     do: 5000
     def recharge_time, do: 10000
   end
 
-  defskill SomeOtherSkill do
+  defskill SomeOtherSkill, id: 2 do
     def description,   do: "Is some other skill."
     def cast_time,     do: 5000
     def recharge_time, do: 10000
+  end
+
+  test "the skill's id" do
+    assert SomeSkill.id == 1
+    assert SomeOtherSkill.id == 2
   end
 
   test "the skill's name" do
@@ -30,5 +35,9 @@ defmodule Entice.SkillsTest do
   test "retrieveing skills by name" do
     assert get_skill("SomeSkill") == {:ok, SomeSkill}
     assert get_skill("SomeOtherSkill") == {:ok, SomeOtherSkill}
+  end
+
+  test "retrieve all skills" do
+    assert %{id: 1, skill: SomeSkill} in get_skills
   end
 end

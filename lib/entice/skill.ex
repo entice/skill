@@ -5,13 +5,14 @@ defmodule Entice.Skill do
     quote do
       import Entice.Skill
 
-      @skills []
+      @skills %{}
       @before_compile Entice.Skill
     end
   end
 
 
-  defmacro defskill(skillname, do: skillimpl) do
+  defmacro defskill(skillname, opts, do_block \\ []) do
+    skillid = Keyword.get(opts, :id)
     name = skillname |> elem(2) |> hd |> to_string
     uname = underscore(name)
 
@@ -19,12 +20,13 @@ defmodule Entice.Skill do
       # add the module
       defmodule unquote(skillname) do
         @behaviour Entice.Skill.Behaviour
+        def id, do: unquote(skillid)
         def name, do: unquote(name)
         def underscore_name, do: unquote(uname)
-        unquote skillimpl
+        unquote(do_block)
       end
       # then update the stats
-      @skills @skills ++ [unquote(skillname)]
+      @skills Map.put(@skills, unquote(skillid), unquote(skillname))
     end
   end
 
@@ -37,7 +39,7 @@ defmodule Entice.Skill do
       Either uses skill ID or tries to convert a skill name to the module atom.
       The skill should be a GW skill name in PascalCase.
       """
-      def get_skill(id) when is_integer(id), do: Enum.fetch(@skills, id - 1)
+      def get_skill(id) when is_integer(id), do: Map.fetch(@skills, id)
       def get_skill(name) do
         try do
           {:ok, ((__MODULE__ |> Atom.to_string) <> "." <> name) |> String.to_existing_atom}
@@ -47,7 +49,11 @@ defmodule Entice.Skill do
       end
 
       @doc "Get all skills that are known"
-      def get_skills, do: @skills
+      def get_skills do
+        @skills
+        |> Map.to_list
+        |> Enum.map(&(%{id: elem(&1, 0), skill: elem(&1, 1)}))
+      end
     end
   end
 end
@@ -55,6 +61,9 @@ end
 
 defmodule Entice.Skill.Behaviour do
   use Behaviour
+
+  @doc "Unique skill identitfier, resembles roughly GW"
+  defcallback id() :: integer
 
   @doc "Unique skill name"
   defcallback name() :: String.t
