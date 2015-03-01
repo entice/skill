@@ -1,6 +1,12 @@
 defmodule Entice.Skills do
   use Entice.Skill
 
+  defskill NoSkill, id: 0 do
+    def description,   do: "Non-existing skill as a placeholder for empty skillbar slots."
+    def cast_time,     do: 0
+    def recharge_time, do: 0
+  end
+
   defskill HealingSignet, id: 1 do
     def description,   do: "You gain 82...154...172 Health. You have -40 armor while using this skill."
     def cast_time,     do: 2000
