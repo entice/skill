@@ -39,21 +39,18 @@ defmodule Entice.Skill do
       Either uses skill ID or tries to convert a skill name to the module atom.
       The skill should be a GW skill name in PascalCase.
       """
-      def get_skill(id) when is_integer(id), do: Map.fetch(@skills, id)
+      def get_skill(id) when is_integer(id), do: Map.get(@skills, id)
       def get_skill(name) do
         try do
-          {:ok, ((__MODULE__ |> Atom.to_string) <> "." <> name) |> String.to_existing_atom}
+          ((__MODULE__ |> Atom.to_string) <> "." <> name) |> String.to_existing_atom
         rescue
-          ArgumentError -> {:error, :skill_not_found}
+          ArgumentError -> nil
         end
       end
 
       @doc "Get all skills that are known"
-      def get_skills do
-        @skills
-        |> Map.to_list
-        |> Enum.map(&(%{id: elem(&1, 0), skill: elem(&1, 1)}))
-      end
+      def get_skills,
+      do: @skills |> Map.values
     end
   end
 end

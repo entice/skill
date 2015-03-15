@@ -28,16 +28,16 @@ defmodule Entice.SkillsTest do
   end
 
   test "retrieveing skills by id" do
-    assert get_skill(1) == {:ok, SomeSkill}
-    assert get_skill(2) == {:ok, SomeOtherSkill}
+    assert get_skill(1) == SomeSkill
+    assert get_skill(2) == SomeOtherSkill
   end
 
   test "retrieveing skills by name" do
-    assert get_skill("SomeSkill") == {:ok, SomeSkill}
-    assert get_skill("SomeOtherSkill") == {:ok, SomeOtherSkill}
+    assert get_skill("SomeSkill") == SomeSkill
+    assert get_skill("SomeOtherSkill") == SomeOtherSkill
   end
 
   test "retrieve all skills" do
-    assert %{id: 1, skill: SomeSkill} in get_skills
+    assert SomeSkill in get_skills
   end
 end
