@@ -66,4 +66,10 @@ defmodule Entice.Skills do
     def cast_time,     do: 0
     def recharge_time, do: 15000
   end
+
+  defskill Distortion, id: 11 do
+    def description,   do: "(1...4...5 seconds.) You have 75% chance to block. Block cost: you lose 2 Energy or Distortion ends."
+    def cast_time,     do: 0
+    def recharge_time, do: 8000
+  end
 end
