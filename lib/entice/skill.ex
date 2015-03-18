@@ -51,6 +51,9 @@ defmodule Entice.Skill do
       @doc "Get all skills that are known"
       def get_skills,
       do: @skills |> Map.values
+
+      def max_unlocked_skills,
+      do: get_skills |> Enum.reduce(0, fn (skill, acc) -> Entice.Utils.BitOps.set_bit(acc, skill.id) end)
     end
   end
 end

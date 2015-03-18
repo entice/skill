@@ -40,4 +40,8 @@ defmodule Entice.SkillsTest do
   test "retrieve all skills" do
     assert SomeSkill in get_skills
   end
+
+  test "bit-array (as int) that contains all skill-ids as set bits" do
+    assert 3 == max_unlocked_skills
+  end
 end
