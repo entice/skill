@@ -9,7 +9,7 @@ defmodule Entice.Skill.Mixfile do
   end
 
   defp deps do
-    [{:entice_utils, github: "entice/utils", ref: "20f15009fee7cf27972ed8e9cdbcbe5371c4227e"},
+    [{:entice_utils, github: "entice/utils", ref: "739a10e6a328582a438c42d01dac9c87af914730"},
      {:inflex, "~> 1.0"}]
   end
 end
