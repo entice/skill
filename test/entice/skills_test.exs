@@ -1,6 +1,6 @@
 defmodule Entice.SkillsTest do
   use Entice.Skill
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   defskill SomeSkill, id: 1 do
     def description,   do: "Is some skill."

@@ -1,2 +1,2 @@
-%{"entice_utils": {:git, "git://github.com/entice/utils.git", "739a10e6a328582a438c42d01dac9c87af914730", [ref: "739a10e6a328582a438c42d01dac9c87af914730"]},
+%{"entice_utils": {:git, "git://github.com/entice/utils.git", "739a10e6a328582a438c42d01dac9c87af914730", [ref: "f8188ac7211994f192e336844b686d96a349ad61"]},
   "inflex": {:hex, :inflex, "1.0.0"}}
