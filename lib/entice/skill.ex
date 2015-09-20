@@ -79,4 +79,7 @@ defmodule Entice.Skill.Behaviour do
 
   @doc "Recharge time of the skill in MS"
   defcallback recharge_time() :: integer
+
+  @doc "Energy cost of the skill in mana"
+  defcallback energy_cost() :: integer
 end

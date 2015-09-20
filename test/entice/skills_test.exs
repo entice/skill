@@ -6,12 +6,14 @@ defmodule Entice.SkillsTest do
     def description,   do: "Is some skill."
     def cast_time,     do: 5000
     def recharge_time, do: 10000
+    def energy_cost,   do: 10
   end
 
   defskill SomeOtherSkill, id: 2 do
     def description,   do: "Is some other skill."
     def cast_time,     do: 5000
     def recharge_time, do: 10000
+    def energy_cost,   do: 10
   end
 
   test "the skill's id" do
