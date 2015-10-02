@@ -8,8 +8,13 @@ defmodule Entice.Skill.Mixfile do
      deps: deps]
   end
 
+  def application do
+    [applications: [:logger, :entice_entity]]
+  end
+
   defp deps do
-    [{:entice_utils, github: "entice/utils", ref: "45fa9369284f92857c4436251a6b995c5d014680"},
+    [{:entice_entity, github: "entice/entity", ref: "abd47e4bf5cc97d69c0c332d9559c63718348c0e"},
+     {:entice_utils, github: "entice/utils", ref: "45fa9369284f92857c4436251a6b995c5d014680"},
      {:inflex, "~> 1.0"}]
   end
 end

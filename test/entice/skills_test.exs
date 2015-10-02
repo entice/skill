@@ -1,6 +1,11 @@
 defmodule Entice.SkillsTest do
   use Entice.Skill
   use ExUnit.Case, async: true
+  alias Entice.Entity
+
+
+  defmodule TestAttr, do: defstruct test_pid: nil
+
 
   defskill SomeSkill, id: 1 do
     def description,   do: "Is some skill."
@@ -14,7 +19,20 @@ defmodule Entice.SkillsTest do
     def cast_time,     do: 5000
     def recharge_time, do: 10000
     def energy_cost,   do: 10
+
+    def effect_cast_start(
+        %Entity{id: id, attributes: %{TestAttr => %TestAttr{test_pid: pid}}},
+        %Entity{id: id}) do
+      send pid, :gotcha
+    end
+
+    def effect_cast_start(
+        %Entity{id: id, attributes: %{TestAttr => %TestAttr{test_pid: pid}}},
+        %Entity{id: id}) do
+      send pid, :gotcha
+    end
   end
+
 
   test "the skill's id" do
     assert SomeSkill.id == 1
@@ -45,5 +63,19 @@ defmodule Entice.SkillsTest do
 
   test "bit-array (as int) that contains all skill-ids as set bits" do
     assert 3 == max_unlocked_skills
+  end
+
+  test "skill cast-time effects" do
+    {:ok, eid, _pid} = Entity.start()
+    Entity.put_attribute(eid, %TestAttr{test_pid: self})
+    SomeOtherSkill.effect_cast_start(eid, eid)
+    assert_receive :gotcha
+  end
+
+  test "skill after-cast-time effects" do
+    {:ok, eid, _pid} = Entity.start()
+    Entity.put_attribute(eid, %TestAttr{test_pid: self})
+    SomeOtherSkill.effect_cast_finish(eid, eid)
+    assert_receive :gotcha
   end
 end
