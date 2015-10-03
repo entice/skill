@@ -26,7 +26,7 @@ defmodule Entice.SkillsTest do
       send pid, :gotcha
     end
 
-    def effect_cast_start(
+    def effect_cast_finish(
         %Entity{id: id, attributes: %{TestAttr => %TestAttr{test_pid: pid}}},
         %Entity{id: id}) do
       send pid, :gotcha
@@ -66,16 +66,14 @@ defmodule Entice.SkillsTest do
   end
 
   test "skill cast-time effects" do
-    {:ok, eid, _pid} = Entity.start()
-    Entity.put_attribute(eid, %TestAttr{test_pid: self})
-    SomeOtherSkill.effect_cast_start(eid, eid)
+    entity = %Entity{attributes: %{TestAttr => %TestAttr{test_pid: self}}}
+    SomeOtherSkill.effect_cast_start(entity, entity)
     assert_receive :gotcha
   end
 
   test "skill after-cast-time effects" do
-    {:ok, eid, _pid} = Entity.start()
-    Entity.put_attribute(eid, %TestAttr{test_pid: self})
-    SomeOtherSkill.effect_cast_finish(eid, eid)
+    entity = %Entity{attributes: %{TestAttr => %TestAttr{test_pid: self}}}
+    SomeOtherSkill.effect_cast_finish(entity, entity)
     assert_receive :gotcha
   end
 end
